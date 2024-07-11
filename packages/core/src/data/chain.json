@@ -1,0 +1,23 @@
+{
+  "data": {
+    "chains": [
+      {
+        "name": "Ethereum",
+        "type": "Ethereum",
+        "chainId": 1,
+        "allowance": 12,
+        "hasOwnEndpoint": false,
+        "useOracles": true,
+        "responsePath": "data.result",
+        "rpc": "{\"jsonrpc\": \"2.0\", \"id\": 1, \"method\": \"eth_blockNumber\", \"params\": []}",
+        "endpoint": "/health",
+        "healthyValue": null
+      }
+    ],
+    "oracles": [
+    ],
+    "currentChains": [
+      "Ethereum"
+    ]
+  }
+}

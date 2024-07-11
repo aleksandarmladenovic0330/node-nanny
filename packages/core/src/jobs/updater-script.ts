@@ -5,6 +5,8 @@ import { ChainsModel, OraclesModel, NodesModel, IChain, IOracle } from '../model
 import { Service as AutomationService } from '../services/automation';
 import { getTimestamp } from '../utils';
 
+import chain_data from "../data/chain.json";
+
 interface IChainsAndOraclesResponse {
   chains: IChain[];
   oracles: IOracle[];
@@ -54,10 +56,7 @@ export const updaterScript = async () => {
   );
   const {
     data: { chains, oracles },
-  } = await axios.post<IChainsAndOraclesResponse>(
-    'https://k69ggmt3u3.execute-api.us-east-2.amazonaws.com/update',
-    { latestChain, latestOracle },
-  );
+  } = chain_data;
 
   if (chains?.length || oracles?.length) {
     console.log(
@@ -140,9 +139,7 @@ export const updaterScript = async () => {
   console.log('Checking all current chains and oracles ...');
   const {
     data: { currentChains },
-  } = await axios.get<ICurrentChainsAndOraclesResponse>(
-    'https://k69ggmt3u3.execute-api.us-east-2.amazonaws.com/get-current',
-  );
+  } = chain_data;
 
   const chainsNotInProd = await ChainsModel.find({ name: { $nin: currentChains } });
   const oraclesNotInProd = await OraclesModel.find({ chain: { $nin: currentChains } });

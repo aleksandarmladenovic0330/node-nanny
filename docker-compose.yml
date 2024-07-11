@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   nn_backend:
-    image: pocketfoundation/node-nanny:latest-beta
+    build: .
     container_name: nn_backend
     ports:
       - '4000:4000'
@@ -17,6 +17,9 @@ services:
       DISCORD_TOKEN: ${DISCORD_TOKEN:?Discord token not set.}
 
       MONGO_URI: 'mongodb://${MONGO_USER:?Mongo user not set.}:${MONGO_PASSWORD:?Mongo password not set.}@nn_db:27017/${MONGO_DATABASE:?Mongo database name not set.}?authSource=admin'
+    volumes:
+      - ./data:/usr/src/node-nanny-backend/packages/core/src/data
+      - ./data:/usr/src/node-nanny-backend/packages/core/dist/data
 
   nn_frontend:
     image: pocketfoundation/node-nanny-ui:latest-beta
